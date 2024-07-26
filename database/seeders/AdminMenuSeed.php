@@ -1,0 +1,200 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\AdminMenu;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+
+class AdminMenuSeed extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $menus = [
+            [
+                'name' => 'Home',
+                'url' => 'admin.index',
+                'icon' => 'fa-home',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+            ],
+            [
+                'name' => 'Manage Users',
+                'url' => 'admin.users.index',
+                'icon' => 'fa-users',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+                'permissions' => ["manage-user","create-user","edit-user","destroy-user"],
+            ],
+            [
+                'name' => 'Manage Admins',
+                'url' => 'admin.admins.index',
+                'icon' => 'fa-user-secret',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+                'permissions' => ["manage-admin","create-admin","edit-admin","destroy-admin"],
+            ],
+            [
+                'name' => 'Access Manager',
+                'url' => '#',
+                'icon' => 'fa-lock',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+                'permissions' => ["manage-role","manage-permission"],
+            ],
+            [
+                'name' => 'Roles',
+                'url' => 'admin.roles.index',
+                'icon' => 'fa-briefcase',
+                'parent_id' => 4,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+                'permissions' => ["manage-role","create-role","edit-role","destroy-role"],
+            ],
+            [
+                'name' => 'Permissions',
+                'url' => 'admin.permissions.index',
+                'icon' => 'fa-unlock',
+                'parent_id' => 4,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+                'permissions' => ["manage-permission","create-permission","edit-permission","destroy-permission"],
+            ],
+            [
+                'name' => 'Manage Pages',
+                'url' => 'admin.pages.index',
+                'icon' => 'fa-file',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+                'permissions' => ["manage-page","create-page","edit-page","destroy-page"],
+            ],
+            [
+                'name' => 'Admin Menus',
+                'url' => 'admin.admin.menus.index',
+                'icon' => 'fa-bars',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+                'permissions' => ["manage-admin-menu","create-admin-menu","edit-admin-menu","destroy-admin-menu"],
+            ],
+            [
+                'name' => 'Settings',
+                'url' => 'admin.settings',
+                'icon' => 'fa-cog',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+                'permissions' => ["manage-setting","edit-setting"],
+            ],
+            [
+                'name' => 'Translation Manager',
+                'url' => 'admin.translations',
+                'icon' => 'fa-language',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'sidebar',
+                'blank' => 0,
+                'permissions' => ["manage-translations"],
+            ],
+            [
+                'name' => 'Quick Access',
+                'url' => '#',
+                'icon' => 'fa-home',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'url',
+                'position' => 'navbar_left',
+                'blank' => 0,
+            ],
+            [
+                'name' => 'Home',
+                'url' => 'admin.index',
+                'icon' => 'fa-home',
+                'parent_id' => 11,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'navbar_left',
+                'blank' => 0,
+            ],
+            [
+                'name' => 'Settings',
+                'url' => 'admin.settings',
+                'icon' => 'fa-cog',
+                'parent_id' => 11,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'navbar_left',
+                'blank' => 0,
+                'permissions' => ["manage-setting","edit-setting"],
+            ],
+            [
+                'name' => 'Quick Access',
+                'url' => '#',
+                'icon' => 'fa-question-circle',
+                'parent_id' => null,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'url',
+                'position' => 'navbar_right',
+                'blank' => 0,
+            ],
+            [
+                'name' => 'Settings',
+                'url' => 'admin.settings',
+                'icon' => 'fa-cog',
+                'parent_id' => 14,
+                'order' => null,
+                'status' => 'active',
+                'type' => 'route',
+                'position' => 'navbar_right',
+                'blank' => 0,
+                'permissions' => ["manage-setting","edit-setting"],
+            ],
+        ];
+
+        foreach ($menus as $menu){
+            AdminMenu::create($menu);
+        }
+    }
+}
