@@ -27,4 +27,11 @@ class HomeController extends Controller
             'latest_users' => User::latest()->limit(10)->get()
         ]); */
     }
+
+    public function criminalGenerate()
+    {
+        return view('admin');
+    }
+
+    
 }

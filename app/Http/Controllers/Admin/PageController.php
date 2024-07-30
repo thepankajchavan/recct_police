@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PageRequest;
 use App\Models\Page;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -12,9 +13,9 @@ class PageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:manage-page|create-page|edit-page|destroy-page', ['only' => ['index','store']]);
-        $this->middleware('permission:create-page', ['only' => ['create','store']]);
-        $this->middleware('permission:edit-page', ['only' => ['edit','update']]);
+        $this->middleware('permission:manage-page|create-page|edit-page|destroy-page', ['only' => ['index', 'store']]);
+        $this->middleware('permission:create-page', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit-page', ['only' => ['edit', 'update']]);
         $this->middleware('permission:destroy-page', ['only' => ['destroy']]);
 
         //Define common page titles, route name and view directory
@@ -48,7 +49,8 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view($this->common['view_index'])->with(['page_title' => $this->common['index_title']]);
+        // return view($this->common['view_index'])->with(['page_title' => $this->common['index_title']]);
+        return view('admin');
     }
 
     /**
@@ -56,7 +58,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view($this->common['view_form'])->with([
+        /* return view($this->common['view_form'])->with([
             'page_title' => $this->common['create_title'],
             'breadcrumbs' => $this->common['breadcrumbs'],
             'form_params' => [
@@ -64,7 +66,8 @@ class PageController extends Controller
                 'method' => 'post',
                 'button_name' => __('common.create'),
             ]
-        ]);
+        ]); */
+        return view('admin');
     }
 
     /**
@@ -73,11 +76,26 @@ class PageController extends Controller
      * @param  PageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PageRequest $request)
+    public function store(Request $request)
     {
-        Page::create($request->all());
+        // return response()->json($request);
+        $page = Page::where('name', $request->get('name'))->first();
+        if ($page) {
+            return 'Page already exists';
+        }
+        $slug = preg_replace('/\s+/', '-', strtolower($request->get('name')));
 
-        return redirect()->route($this->common['route_index'])->withSuccess(__('common.item_created_success', ['item' => __('common.page')]));
+        $page = new Page([
+            'name' => $request->get('name'),
+            'slug' => $slug,
+            'content' => $request->get('content'),
+            'status' => $request->get('status')
+        ]);
+        $page->save();
+
+        return "success";
+
+        // return redirect()->route($this->common['route_index'])->withSuccess(__('common.item_created_success', ['item' => __('common.page')]));
     }
 
     /**
@@ -86,7 +104,7 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        return view($this->common['view_form'])->with([
+        /* return view($this->common['view_form'])->with([
             'page_title' => $this->common['edit_title'],
             'breadcrumbs' => $this->common['breadcrumbs'],
             'form_params' => [
@@ -95,7 +113,8 @@ class PageController extends Controller
                 'button_name' => __('common.update'),
             ],
             'item' => $page,
-        ]);
+        ]); */
+        return view('admin');
     }
 
     /**
@@ -105,11 +124,21 @@ class PageController extends Controller
      * @param  \App\Models\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function update(PageRequest $request, Page $page)
+    public function update(Request $request, $id)
     {
-        $page->update($request->all());
-
-        return redirect()->route($this->common['route_index'])->withSuccess(__('common.item_updated_success', ['item' => __('common.page')]));
+        /* $page = Page::where('name', $request->get('name'))->first();
+        if ($page) {
+            return 'Page already exists';
+        } */
+        $slug = preg_replace('/\s+/', '-', strtolower($request->get('name')));
+        $page = Page::Find($id);
+        $page->name = $request->get('name');
+        $page->slug = $slug;
+        $page->content = $request->get('content');
+        $page->status = $request->get('status');
+        $page->update();
+        return "success";
+        // return redirect()->route($this->common['route_index'])->withSuccess(__('common.item_updated_success', ['item' => __('common.page')]));
     }
 
     /**
@@ -121,7 +150,7 @@ class PageController extends Controller
      */
     public function clone(PageRequest $request, Page $page)
     {
-        $page->replicate()->fill(['name' => $page->name. ' (copy)', 'slug' => $page->slug.'_copy', 'status' => 'draft'])->save();
+        $page->replicate()->fill(['name' => $page->name . ' (copy)', 'slug' => $page->slug . '_copy', 'status' => 'draft'])->save();
 
         return redirect()->route($this->common['route_index'])->withSuccess(__('common.item_duplicated_success', ['item' => __('common.page')]));
     }
@@ -132,10 +161,25 @@ class PageController extends Controller
      * @param  \App\Models\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Page $page)
+    public function destroy(String $id)
     {
+        $page = Page::find($id);
         $page->delete();
 
-        return redirect()->route($this->common['route_index'])->withSuccess(__('common.item_destroyed_success', ['item' => __('common.page')]));
+        return redirect('/admin/pages');
+        // return redirect()->route($this->common['route_index'])->withSuccess(__('common.item_destroyed_success', ['item' => __('common.page')]));
+    }
+
+    public function fetchPages()
+    {
+        $pages = Page::select('name','id','slug','status')->get();
+        return response()->json($pages);
+
+    }
+    public function fetchPage($id)
+    {
+        $pages = Page::find($id);
+        return response()->json($pages);
+
     }
 }

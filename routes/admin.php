@@ -73,6 +73,15 @@ Route::prefix(config('laraminlte.backend_prefix'))->group(static function () {
 
         //Police Stations
         Route::resource('police-station',\App\Http\Controllers\Admin\PoliceStationController::class);
+        Route::get('fetch-stations',[\App\Http\Controllers\Admin\PoliceStationController::class,'fetchStations']);
+        Route::get('fetch-station/{id}',[\App\Http\Controllers\Admin\PoliceStationController::class,'fetchStation']);
+
+        //lost and Found
+        Route::resource('lost-found',\App\Http\Controllers\Admin\LostFoundController::class);
+        Route::get('fetch-reports',[\App\Http\Controllers\Admin\LostFoundController::class,'fetchReports']);
+        Route::get('fetch-report/{id}',[\App\Http\Controllers\Admin\LostFoundController::class,'fetchReport']);
+
+        
 
         // Admin Menu routes
         Route::get('admin-menus/{admin_menu}/clone', [\App\Http\Controllers\Admin\AdminMenuController::class, 'clone'])->name('admin.admin.menus.clone');
@@ -108,6 +117,42 @@ Route::prefix(config('laraminlte.backend_prefix'))->group(static function () {
         // Page routes
         Route::get('pages/{page}/clone', [\App\Http\Controllers\Admin\PageController::class, 'clone'])->name('admin.pages.clone');
         Route::resource('pages', \App\Http\Controllers\Admin\PageController::class, ['names' => 'admin.pages'])->except(['show']);
+        Route::get('fetch-pages',[\App\Http\Controllers\Admin\PageController::class, 'fetchPages']);
+        Route::get('fetch-page/{id}',[\App\Http\Controllers\Admin\PageController::class, 'fetchPage']);
+
+        //criminal_history
+        Route::get('/criminal-generate',[\App\Http\Controllers\Admin\HomeController::class,'criminalGenerate']);
+        Route::get('/criminal-history',[\App\Http\Controllers\Admin\HomeController::class,'criminalGenerate']);
+
+        //Press Release
+        Route::resource('press-release',\App\Http\Controllers\Admin\PressReleaseController::class);
+        Route::get('fetch-press-releases',[\App\Http\Controllers\Admin\PressReleaseController::class,'fetchPressReleases']);
+
+        //Police Recruitment
+        Route::resource('recruitment',\App\Http\Controllers\Admin\RecruitementController::class);
+        Route::get('fetch-recruitment',[\App\Http\Controllers\Admin\RecruitementController::class,'fetchAll']);
+
+        //Police Flash
+        Route::resource('police-flash',\App\Http\Controllers\Admin\FlashController::class);
+        Route::get('fetch-flash',[\App\Http\Controllers\Admin\FlashController::class,'fetchAll']);
+
+        //Police Officers
+        Route::resource('police-officer',\App\Http\Controllers\Admin\PoliceOfficersController::class);
+        Route::get('fetch-officers',[\App\Http\Controllers\Admin\PoliceOfficersController::class,'fetchOfficers']);
+        Route::get('fetch-officer/{id}',[\App\Http\Controllers\Admin\PoliceOfficersController::class,'fetchOfficer']);
+
+        //Gallery
+        Route::resource('gallery',\App\Http\Controllers\Admin\GalleryController::class);
+        Route::get('fetch-gallery',[\App\Http\Controllers\Admin\GalleryController::class,'fetchAll']);
+
+        //Slider
+        Route::resource('slider',\App\Http\Controllers\Admin\SliderController::class);
+        Route::get('fetch-slider',[\App\Http\Controllers\Admin\SliderController::class,'fetchAll']);
+
+        //Video Gallery
+        Route::resource('video-gallery',\App\Http\Controllers\Admin\VideoController::class);
+        Route::get('fetch-video',[\App\Http\Controllers\Admin\VideoController::class,'fetchAll']);
+
 
     });
 });

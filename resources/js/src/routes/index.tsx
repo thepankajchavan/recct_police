@@ -54,6 +54,17 @@ const RolesTable = React.lazy(()=>import('./../views/uielements/tables/RolesTabl
 const PermissionTable = React.lazy(()=>import('./../views/uielements/tables/PermissionTable'))
 const AdminMenusTable = React.lazy(()=>import('./../views/uielements/tables/AdminMenusTable'))
 const NewsEventsTable = React.lazy(()=>import('./../views/uielements/tables/NewsAndTable/NewsEventsTable'))
+const PoliceStationTable = React.lazy(()=>import('./../views/uielements/tables/PoliceStation/PoliceStationTable'))
+const LostFoundTable = React.lazy(()=>import('./../views/uielements/tables/LostFound/LostFoundTable'))
+const HistoryTable = React.lazy(()=>import('./../views/uielements/tables/Criminal/HistoryTable'))
+const PagesTable = React.lazy(()=>import('./../views/uielements/tables/pages/PagesTable'))
+const PressReleaseTable = React.lazy(()=>import('./../views/uielements/tables/PressRelease/PressReleaseTable'))
+const RecruitmentTable = React.lazy(()=>import('./../views/uielements/tables/Recruitment/RecruitmentTable'))
+const FlashTable = React.lazy(()=>import('./../views/uielements/tables/Flash/FlashTable'))
+const PoliceOfficerTable = React.lazy(()=>import('./../views/uielements/tables/PoliceOfficer/PoliceOfficerTable'))
+const GalleryTable = React.lazy(()=>import('./../views/uielements/tables/Gallery/GalleryTable'))
+const SliderTable = React.lazy(()=>import('./../views/uielements/tables/Slider/SliderTable'))
+const VideoTable = React.lazy(()=>import('./../views/uielements/tables/Video/VideoTable'))
 
 // Charts
 const ApexCharts = React.lazy(() => import('./../views/uielements/charts/ApexCharts'))
@@ -78,11 +89,17 @@ const AddPermissionForm = React.lazy(()=>import('./../views/uielements/forms/Add
 const AddAdminMenuForm = React.lazy(()=>import('./../views/uielements/forms/AddAdminMenuForm'))
 const AddNewsEvent = React.lazy(()=>import('./../views/uielements/forms/NewsAndEvents/AddNewsEvent'))
 const AddStationForm = React.lazy(()=>import('./../views/uielements/forms/PoliceStation/AddStationForm'))
+const GenerateCriminalForm = React.lazy(()=>import('./../views/uielements/forms/Criminal/GenerateCriminalForm'))
+const AddPageForm = React.lazy(()=>import('./../views/uielements/forms/pages/AddPageForm'))
+const AddPoliceOfficerForm = React.lazy(()=>import('./../views/uielements/forms/PoliceOfficer/AddPoliceOfficerForm'))
 const EditUserForm = React.lazy(()=>import('./../views/uielements/forms/EditUserForm'))
 const EditAdminForm = React.lazy(()=>import('./../views/uielements/forms/EditAdminForm'))
 const EditRoleForm = React.lazy(()=>import('./../views/uielements/forms/EditRoleForm'))
 const EditPermissionForm = React.lazy(()=>import('./../views/uielements/forms/EditPermissionForm'))
 const EditNewsEvent = React.lazy(()=>import('./../views/uielements/forms/NewsAndEvents/EditNewsEvent'))
+const EditStationForm = React.lazy(()=>import('./../views/uielements/forms/PoliceStation/EditStationForm'))
+const EditPageForm = React.lazy(()=>import('./../views/uielements/forms/pages/EditPageForm'))
+const EditPoliceOfficer = React.lazy(()=>import('./../views/uielements/forms/PoliceOfficer/EditPoliceOfficer'))
 
 // Editors
 const EditorQuill = React.lazy(() => import('./../views/uielements/editors/EditorQuill'))
@@ -491,15 +508,69 @@ const componentsRoutes: RoutesProps = {
           route: PrivateRoute,
         },
         {
-          path: '/components/tables/vendor-master',
-          name: 'VendorMaster',
-          element: <VendorMaster />,
+          path: '/admin/police-station',
+          name: 'PoliceStation',
+          element: <PoliceStationTable />,
           route: PrivateRoute,
         },
         {
-          path: '/vts-details/:sitename',
-          name: 'VTSMaster',
-          element: <VTSTable />,
+          path: '/admin/lost-and-found',
+          name: 'LostAndFoundTable',
+          element: <LostFoundTable />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/criminal-history',
+          name: 'CriminalHistoryTable',
+          element: <HistoryTable />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/pages',
+          name: 'PagesTable',
+          element: <PagesTable />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/press-release',
+          name: 'PressRelease',
+          element: <PressReleaseTable />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/recruitment',
+          name: 'recruitment',
+          element: <RecruitmentTable />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/police-flash',
+          name: 'flash',
+          element: <FlashTable />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/police-officer',
+          name: 'PoliceOfficer',
+          element: <PoliceOfficerTable />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/gallery',
+          name: 'Gallery',
+          element: <GalleryTable />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/slider',
+          name: 'Slider',
+          element: <SliderTable />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/video-gallery',
+          name: 'VideoGallery',
+          element: <VideoTable />,
           route: PrivateRoute,
         },
         {
@@ -629,9 +700,33 @@ const componentsRoutes: RoutesProps = {
           route: PrivateRoute,
         },
         {
+          path: '/admin/criminal-generate',
+          name: 'GenerateCriminal',
+          element: <GenerateCriminalForm />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/pages/create',
+          name: 'AddPages',
+          element: <AddPageForm />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/police-officer/create',
+          name: 'AddPoliceOfficer',
+          element: <AddPoliceOfficerForm />,
+          route: PrivateRoute,
+        },
+        {
           path: '/admin/settings',
           name: 'SettingsMenu',
           element: <NavSettings />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/police-station/:id/edit',
+          name: 'EditPoliceStation',
+          element: <EditStationForm />,
           route: PrivateRoute,
         },
         {
@@ -662,6 +757,18 @@ const componentsRoutes: RoutesProps = {
           path: '/admin/permissions/:id/edit',
           name: 'EditPermission',
           element: <EditPermissionForm />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/pages/:id/edit',
+          name: 'EditPages',
+          element: <EditPageForm />,
+          route: PrivateRoute,
+        },
+        {
+          path: '/admin/police-officer/:id/edit',
+          name: 'EditPoliceOfficer',
+          element: <EditPoliceOfficer />,
           route: PrivateRoute,
         },
         {

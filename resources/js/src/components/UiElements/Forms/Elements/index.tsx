@@ -16,7 +16,18 @@ import AddAdminMenuEle from './AddAdminMenuEle'
 import AddNewsAndEventsFrm from './NewsAndEvents/AddNewsAndEventsFrm'
 import EditNewsEventsFrm from './NewsAndEvents/EditNewsEventsFrm'
 import AddStationFrm from './PoliceStations/AddStationFrm'
-
+import EditPoliceStationFrm from './PoliceStations/EditPoliceStationFrm'
+import GenerateCriminalFrm from './Criminal/GenerateCriminalFrm'
+import AddPageFrm from './pages/AddPageFrm'
+import EditPageFrm from './pages/EditPageFrm'
+import PressReleaseFrm from './PressRelease/PressReleaseFrm'
+import AddRecruitmentFrm from './Recruitement/AddRecruitmentFrm'
+import AddFlashFrm from './Flash/AddFlashFrm'
+import AddPoliceOfficersFrm from './PoliceOfficers/AddPoliceOfficersFrm'
+import EditPoliceOfficerFrm from './PoliceOfficers/EditPoliceOfficerFrm'
+import GalleryFrm from './Gallery/GalleryFrm'
+import SliderFrm from './Slider/SliderFrm'
+import VideoFrm from './Video/VideoFrm'
 
 
 export {
@@ -38,4 +49,16 @@ export {
   AddNewsAndEventsFrm,
   EditNewsEventsFrm,
   AddStationFrm,
+  EditPoliceStationFrm,
+  GenerateCriminalFrm,
+  AddPageFrm,
+  EditPageFrm,
+  PressReleaseFrm,
+  AddRecruitmentFrm,
+  AddFlashFrm,
+  AddPoliceOfficersFrm,
+  EditPoliceOfficerFrm,
+  GalleryFrm,
+  SliderFrm,
+  VideoFrm,
 }

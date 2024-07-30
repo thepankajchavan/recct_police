@@ -53,16 +53,66 @@ const MENU_ITEMS: MenuItemTypes[] = [
     icon: 'fi fi-rr-lock',
     children: [
       {
-        key: 'news_events_add',
+        key: 'police_stations_add',
         label: 'Add New',
         url: '/admin/police-station/create',
         parentKey: 'police_stations',
       },
       {
-        key: 'news_events_show',
+        key: 'police_stations_show',
         label: 'Show All',
         url: '/admin/police-station',
         parentKey: 'police_stations',
+      },
+      
+      
+    ],
+  },
+  {
+    key: 'lost_found',
+    label: 'Lost and Found',
+    isTitle: false,
+    icon: 'fi fi-rr-file',
+    children: [
+      /* {
+        key: 'lost_found_add',
+        label: 'Add New',
+        url: '/admin/lost-and-found/create',
+        parentKey: 'lost_found',
+      }, */
+      {
+        key: 'lost_found_show',
+        label: 'Show All',
+        url: '/admin/lost-and-found',
+        parentKey: 'lost_found',
+      },
+      
+      
+    ],
+  },
+  {
+    key: 'criminal_history',
+    label: 'Criminal Tracking',
+    isTitle: false,
+    icon: 'fi fi-rr-file',
+    children: [
+      {
+        key: 'criminal_history_add',
+        label: 'Generate',
+        url: '/admin/criminal-generate',
+        parentKey: 'criminal_history',
+      },
+      {
+        key: 'criminal_history_show',
+        label: 'View History',
+        url: '/admin/criminal-history',
+        parentKey: 'criminal_history',
+      },
+      {
+        key: 'criminal_history_trace',
+        label: 'Trace Criminal',
+        url: '/admin/criminal-trace',
+        parentKey: 'criminal_history',
       },
       
       
@@ -115,6 +165,82 @@ const MENU_ITEMS: MenuItemTypes[] = [
     icon: 'fi fi-rr-file',
   },
   {
+    key: 'press_release',
+    label: 'Press Release',
+    url: '/admin/press-release',
+    parentKey: 'dashboards',
+    icon: 'fi fi-rr-newspaper',
+  },
+  {
+    key: 'police_recruitment',
+    label: 'Police Recruitment',
+    url: '/admin/recruitment',
+    parentKey: 'dashboards',
+    icon: 'fi fi-rr-hr',
+  },
+  {
+    key: 'police_flash',
+    label: 'Police Flash',
+    url: '/admin/police-flash',
+    parentKey: 'dashboards',
+    icon: 'fi fi-rr-square-bolt',
+  },
+  {
+    key: 'police_officers',
+    label: 'Police Officers',
+    url: '/admin/police-officers',
+    parentKey: 'dashboards',
+    icon: 'fi fi-rr-user-shield',
+  },
+  {
+    key: 'slider',
+    label: 'Slider',
+    url: '/admin/slider',
+    parentKey: 'dashboards',
+    icon: 'fi fi-rr-picture',
+  },
+  {
+    key: 'gallery',
+    label: 'Image Gallery',
+    url: '/admin/gallery',
+    parentKey: 'dashboards',
+    icon: 'fi fi-rr-picture',
+  },
+  {
+    key: 'video-gallery',
+    label: 'Video Gallery',
+    url: '/admin/video-gallery',
+    parentKey: 'dashboards',
+    icon: 'fi fi-rr-video-camera-alt',
+  },
+  {
+    key: 'confidential-info',
+    label: 'Confidential Info',
+    url: '/admin/confidential-info',
+    parentKey: 'dashboards',
+    icon: 'fi fi-rr-user-key',
+  },
+  {
+    key: 'account_settings',
+    label: 'Account Settings',
+    isTitle: false,
+    icon: 'fi fi-rr-lock',
+    children: [
+      {
+        key: 'profile',
+        label: 'Profile',
+        url: '/admin/profile',
+        parentKey: 'account_settings',
+      },
+      {
+        key: 'change_password',
+        label: 'Change Password',
+        url: '/admin/change-password',
+        parentKey: 'account_settings',
+      },      
+    ],
+  },
+  {
     key: 'admin_menus',
     label: 'Admin Menus',
     url: '/admin/admin-menus',
@@ -128,7 +254,7 @@ const MENU_ITEMS: MenuItemTypes[] = [
     parentKey: 'dashboards',
     icon: 'fi fi-rs-settings',
   },
-  {
+  /* {
     key:'vehicle',
     label:'Assets',
     isTitle:true,
@@ -172,7 +298,7 @@ const MENU_ITEMS: MenuItemTypes[] = [
     url: '/components/tables/vendor-master',
     icon: 'fi fi-bs-user',
     parentKey: 'tables',
-  },
+  }, */
   /* {
     key: 'vtsMaster',
     label: 'VTS',
